@@ -17,11 +17,13 @@ npoints=$3
 fstart=$4
 fstop=$5
 
+
 result=`ssh $REMOTEHOST $REMOTECMD $npoints $fstart $fstop`
 
 echo "
 set style line 1 lc rgb '#d95319' lt 1 lw 3
 set style line 12 lc rgb '#808080' lt 1 lw 0.3
+set style line 13 lc rgb '#E0E000' lt 1 lw 6
 
 set grid xtics mxtics ytics
 set grid xtics ytics mxtics mytics ls 12, ls 12
@@ -41,6 +43,8 @@ set ylabel 'Lectura ADC (%)'
 
 set obj 21 rect from graph 0, graph 0 to graph 1, graph 1 lw 0 fs solid 0.99 fc rgb '#D6E8D9' behind
 
+#set arrow 20 from 125000,0 to 125000,100 nohead ls 13
+
 #set obj 21 rect from screen 0,0 to screen 1,1 fillcolor rgb '#EAEAEA' behind
 #set obj 20 rect from graph 0, graph 0 to graph 1, graph 1 lw 0 fs solid 0.99 fc rgb '#DFEAE6' behind
 
@@ -53,5 +57,5 @@ plot '-' using 1:(\$2/255*100) sm un ls 1 t ''
 $result
 " | gnuplot
 
-ristretto $outfile
+ps -ef | grep -qs "[f]eh" || feh --reload 1 $outfile &
 
