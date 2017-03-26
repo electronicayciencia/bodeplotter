@@ -6,7 +6,7 @@
 % Main options
 Fc    = 500;     % clock frequency
 Tfreq = 27.155;  % Target frequency
-Order = 8;       % Fractional order
+Order = 0;       % Fractional order
 
 DIV  = Fc / Tfreq;
 
