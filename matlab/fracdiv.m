@@ -4,15 +4,15 @@
 
 %-------------------------------------
 % Main options
-Fc    = 500;     % clock frequency
-Tfreq = 27.155;  % Target frequency
-Order = 0;       % Fractional order
+Fc    = 19200;     % clock frequency
+Tfreq = 4.700;  % Target frequency
+Order = 1;       % Fractional order
 
 DIV  = Fc / Tfreq;
 
 %-------------------------------------
 % Main loop
-n  = 2000000;  % number of points
+n  = 4000000;  % number of points
 SR = 20*Fc;    % sampling rate
 T  = n/SR;     % sampling time (s)
 
@@ -76,6 +76,7 @@ ft = linspace(SR/2/n,SR/2,n/2-1);
 ff = abs(fft(out)) / (n/2);
 ff = 20*log(ff);
 ff = ff(2:n/2);
+ff(ff < -1000) = -1000;
 
 [val,pos] = max(ff);
 peakfreq = ft(pos);
@@ -88,7 +89,7 @@ s2   = sprintf('Fractional order: %d', Order);
 str1 = sprintf('Target frequency: %4.3fHz', Tfreq);
 str2 = sprintf('Main frequency:   %4.3fHz (%4.2fdB)', ...
     peakfreq, val);
-str3 = sprintf('\\bf{Mean frequency:   %4.3fHz} (Error: %+4.2f%%)', ...
+str3 = sprintf('Mean frequency:   %4.3fHz (Error: %+4.2f%%)', ...
     meanfreq, ...
     (meanfreq - Tfreq)/Tfreq * 100);
 

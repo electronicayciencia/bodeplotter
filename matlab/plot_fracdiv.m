@@ -21,8 +21,9 @@ xlabel('Frequency (Hz)');
 
 % Create title
 t = title('Fractionary divisor analysis');
-%P = get(t,'Position');
-set(t,'Position',[66 2 0]);
+set( t, 'Units', 'normalized');
+P = get(t,'Position');
+set(t,'Position',[P(1) P(2)*1.02 P(3)]);
 
 % Create ylabel
 ylabel('Power (dB)');
